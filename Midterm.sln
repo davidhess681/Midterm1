@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+<<<<<<< HEAD
 VisualStudioVersion = 15.0.28010.2046
+=======
+VisualStudioVersion = 15.0.28010.2016
+>>>>>>> added sln file
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Midterm", "Midterm.csproj", "{9F2C7BED-E394-4E3A-8466-41EDB5CFD297}"
 EndProject
@@ -20,6 +24,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+<<<<<<< HEAD
 		SolutionGuid = {F13809AB-7373-4AEF-AA08-23B2CCD207BF}
+=======
+		SolutionGuid = {F69F23A4-64DB-43FF-99CC-9F7BF331E415}
+>>>>>>> added sln file
 	EndGlobalSection
 EndGlobal
