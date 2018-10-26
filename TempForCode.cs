@@ -50,55 +50,42 @@ namespace Midterm
 
        }
 
-    }
-}
-// I know this is currently broken and the syntax is off, I am bad with lists
-//I just tried to throw some ish out there as something to build off of; 
-//better than nothing
-
-Console.WriteLine("\nWould you like to add a Book? (Y or N)?");
+        public static void AddABook()
+        {
+            Console.WriteLine("\nWould you like to add a Book? (Y or N)?");
             string choice = Console.ReadLine().ToLower();
-            if (choice == 'n')
+            if (choice == "n")
             {
                 Console.WriteLine("\nGoodbye.");
                 Console.ReadLine();
-                return false;
             }
-            else if (choice == 'y')
+            else if (choice == "y")
             {
-                return true;
+                Console.WriteLine("\nWhat is the Title of the Book you want to add?\n");
+                string newTitle = Check();
+                Console.WriteLine("\nWhat is the Author of the book you want to add?\n");
+                string newAuthor = Check();
+
+                Book newBook = new Book(newTitle, newAuthor);
+
+                Program.Library.Add(newBook);
+                Console.WriteLine("Book added to list");
             }
-            else
+            public static string Check()
             {
-                Console.Write("Invalid. Try again: ");
+                choice = Console.ReadLine();
+                if (choice == "")
+                {
+                    Console.Write("Cannot be empty");
+                    return Check();
+                }
+                else
+                {
+                    return choice;
+                }
             }
-            Console.WriteLine("\nWhat is the Title of the Book you want to add?\n");
-            string newTitle = Check();
-Console.WriteLine("\nWhat is the Author of the book you want to add?\n");
-            string newAuthor = Check();
-Console.WriteLine("\nWhat is the Status of the Book you want to add?\n");
-            bool newStatus = Check();
-Console.WriteLine("\nWhat is the Due Date of the Book you want to add?\n");
-            DateTime newDueDate = Check();
 
 
-Library.Add(new Book);
-            Book.Insert(newTitle);
-            Book.Insert(newAuthor);
-            Book.Insert(newStatus);
-            Book.Insert(newDueDate)
-            Console.WriteLine("Book added to list")
-
-           public static string Check()
-{
-    choice = Console.ReadLine();
-    if (choice == "")
-    {
-        Console.Write("Cannot be empty");
-        return choice();
-    }
-    else
-    {
-        return choice;
+        }
     }
 }
