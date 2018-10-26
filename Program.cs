@@ -11,16 +11,27 @@ namespace Midterm
     {
         static void Main(string[] args)
         {
-            string fileLib = @"c:/temp/libraryFile.txt";
-            InitialStream(fileLib);
+            
+            InitialStream();
 
             Console.WriteLine("Success!");
+
+            do
+            {
+                // LibraryActions.AllSearch();
+            }
+            while (Validation.YesOrNo(Console.ReadLine()));
+
+            UpdateLibraryFile();
+            Console.WriteLine("Library file has been updated! Press any key to close.");
+
             Console.ReadKey();
         }
 
         public static List<Book> Library = new List<Book>();
+        public static string fileLib = @"c:/temp/libraryFile.txt";
 
-        static void InitialStream(string fileLib)
+        static void InitialStream()
         {
             // check if file exists
             if (File.Exists(fileLib))
@@ -53,14 +64,9 @@ namespace Midterm
             {
                 // write default books to new file
 
-                StreamWriter createLibrary = new StreamWriter(fileLib);     // create new stream writer
                 CreateDefaultBooks();       // create books and add them to library
-                foreach (Book b in Library)     // do this for each book
-                {
-                    createLibrary.WriteLine(b.Title);   // write book title to a new line
-                    createLibrary.WriteLine(b.Author);  // same with author
-                }
-                createLibrary.Close();  // always be closing
+                UpdateLibraryFile();
+                
                 Console.WriteLine("Created new file 'library.txt'");    // temp statement to show us which action took place
             }
         }
@@ -95,6 +101,24 @@ namespace Midterm
             Library.Add(TheAlchemist);
         }
         
+        static void UpdateLibraryFile()
+        {
+            try
+            {
+                StreamWriter createLibrary = new StreamWriter(fileLib, false);     // create new stream writer
 
+                foreach (Book b in Library)     // do this for each book
+                {
+                    createLibrary.WriteLine(b.Title);   // write book title to a new line
+                    createLibrary.WriteLine(b.Author);  // same with author
+                }
+                createLibrary.Close();  // always be closing
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong writing to the library file!");
+                Console.ReadKey();
+            }
+        }
     }
 }
