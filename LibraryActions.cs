@@ -11,9 +11,12 @@ namespace Midterm
         public int allSearch()
         {
             int userNumSelect();
+            bool userSelect
             Console.WriteLine("Please Choose the following opitions:\n");
             Console.WriteLine("1. List All Books\n2. Search\n3.Check Out Book\n4.Return Book");
+
         }
+        /*
         public bool IsCheckedOut(List<Book> stuff)
         {
             Program.whatever = stuff;
@@ -42,7 +45,7 @@ namespace Midterm
             }
 
 
-        }
+        }*/
 
         public LibraryActions()
         {
