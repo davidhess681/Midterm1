@@ -49,12 +49,16 @@ namespace Midterm
         {
             if (sentence == null) return sentence;//if theres no input, returns nothing
 
+            char firstChar;
             string[] words = sentence.Split(' ');
             for (int i = 0; i < words.Length; i++)//for each word in the string
             {
                 if (words[i].Length == 0) continue;//if length of word is 0, move to next word
 
-                char firstChar = char.ToUpper(words[i][0]);//changes the first letter of each word as upper case
+                //if (words[i] != ("a"||"an"||"the"||"of" ||"and"||"but"||"for"||"at"||"by"||"from"))
+                //{
+                firstChar = char.ToUpper(words[i][0]);//changes the first letter of each word as upper case
+                //}
                 string rest = "";
                 if (words[i].Length > 1)//for each word length thats greater than 1 letter
                 {
