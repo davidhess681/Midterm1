@@ -8,13 +8,38 @@ namespace Midterm
 {
     class LibraryActions
     {
-        public int allSearch()
+        public void allSearch()
         {
-            int userNumSelect();
-            bool userSelect
+            int userNumSelect;
+            bool userSelect;
             Console.WriteLine("Please Choose the following opitions:\n");
             Console.WriteLine("1. List All Books\n2. Search\n3.Check Out Book\n4.Return Book");
+            Console.Write("Please enter a menu number: ");
+            userNumSelect =  Validation.SelectNum(Console.ReadLine());
 
+            switch(userNumSelect)
+            {
+                case 1:
+                    {
+                        //call method
+                        break;
+                    }
+                case 2:
+                    {
+                        //call method
+                        break;
+                    }
+                case 3:
+                    {
+                        //call method
+                        break;
+                    }
+                default:
+                    {
+                        //call method for 4
+                        break;
+                    }
+            }
         }
         /*
         public bool IsCheckedOut(List<Book> stuff)

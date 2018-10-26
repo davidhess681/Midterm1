@@ -67,7 +67,8 @@ namespace Midterm
 
                     if (numTemp < 0 && numTemp >= 4)
                     {
-                        return true;
+                        return numTemp;
+                        //break; //do we need the break or does the return break it.
                     }
                     else
                     {
