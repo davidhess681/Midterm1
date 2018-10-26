@@ -59,14 +59,19 @@ namespace Midterm
 
         public static void ListBooks()
         {
-            Console.WriteLine("List Book Method"); //temp
+            foreach (Book b in Program.Library)
+            {
+                Console.WriteLine("{0,-20}{1,0}", b.Title, b.Author);
+            }
+            
         }
         //public static string userSearch;
         public static void SearchBookTitle()
         {
             string userSearch;
             Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
-            userSearch = Validation.IsInputValid(Console.ReadLine().ToLower());
+            userSearch = Validation.IsInputValidTitle
+                (Console.ReadLine().ToLower());
 
             foreach(Book b in Program.Library)
             {
@@ -77,7 +82,6 @@ namespace Midterm
             }
         }
 
-
         //Searches for Author
         public static void SearchBookAuthor()
         {
@@ -85,7 +89,7 @@ namespace Midterm
 
             ArrayForWrtie.Clear(); //clearing array be each search
             Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
-            userSearch = Validation.IsInputValid(Console.ReadLine().ToLower()); //passing to validation
+            userSearch = Validation.IsInputValidAuthor(Console.ReadLine().ToLower()); //passing to validation
 
             foreach (Book b in Program.Library)
             {
