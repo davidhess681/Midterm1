@@ -15,7 +15,8 @@ namespace Midterm
             int userNumSelect;
             bool userSelect;
             Console.WriteLine("Please Choose the following opitions:\n");
-            Console.WriteLine("1. List All Books\n2. Search\n3.Check Out Book\n4.Return Book");
+            Console.WriteLine("1. List All Books\n2. Search\n3.Check Out Book" +
+                "\n4.Return Book\n5.Add Book\n6.Quit Program");
             Console.Write("Please enter a menu number: ");
             userNumSelect =  Validation.SelectNum(Console.ReadLine());
 
@@ -30,7 +31,7 @@ namespace Midterm
                     {
                         string userInputTemp = "";
 
-                        Console.WriteLine("What would you like to search.?\n\n1. By Title or 2.By Author");
+                        Console.Write("What would you like to search.?\n\n1. By Title or 2. By Author\nPlease Enter Number:  ");
                         userInputTemp = Console.ReadLine();
                         
                         //going to add validation later
@@ -46,12 +47,22 @@ namespace Midterm
                     }
                 case 3:
                     {
-                        //call method
+                        //call method return
+                        break;
+                    }
+                case 4:
+                    {
+                        //call method checkout
+                        break;
+                    }
+                case 5:
+                    {
+                        //call method add files
                         break;
                     }
                 default:
                     {
-                        //call method for 4
+                        // return bool to exit from main
                         break;
                     }
             }
@@ -63,7 +74,6 @@ namespace Midterm
             Console.WriteLine("\n{0,-30}{1,0}", "Title", "Author");
             foreach (Book b in Program.Library)
             {
-
                 Console.WriteLine("{0,-30}{1,0}", b.Title, b.Author);
             }
             
@@ -73,12 +83,13 @@ namespace Midterm
         {
             string userSearch;
             string toLower;
+
             switch(testForIf)
             {
                 case "searchTitle":
                     {
                         ArrayForWrtie.Clear();
-                        Console.Write("Please input keywords you wish to search for: (by book Title)");
+                        Console.Write("\nPlease input keywords you wish to search for: (by Title)");
                         userSearch = Validation.IsInputValidTitle
                             (Console.ReadLine().ToLower());
 
@@ -95,12 +106,13 @@ namespace Midterm
                 case "searchAuthor":
                     {
                         ArrayForWrtie.Clear();
-                        Console.Write("Please input keywords you wish to search for: (by Author)");
+                        Console.Write("\nPlease input keywords you wish to search for: (by Author)");
                         userSearch = Validation.IsInputValidTitle
                             (Console.ReadLine().ToLower());
                         foreach (Book b in Program.Library)
                         {
-                            if (b.Author.Contains(userSearch)) //stores each item in array if string contains usersearch
+                            toLower = b.Author.ToLower();
+                            if (toLower.Contains(userSearch)) //stores each item in array if string contains usersearch
                             {
                                 ArrayForWrtie.Add(b);
                             }
@@ -115,24 +127,7 @@ namespace Midterm
 
             foreach(Book ans in ArrayForWrtie)
             {
-                Console.WriteLine("{0,-50}{1,0}","Title","Author");
-                Console.WriteLine("{0,-50}{1,0}", ans.Title, ans.Author);
-            }
-        }
-
-        //Searches for Author
-        public static void SearchBookAuthor()
-        {
-            string userSearch;
-
-            ArrayForWrtie.Clear(); //clearing array be each search
-            Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
-            userSearch = Validation.IsInputValidAuthor(Console.ReadLine().ToLower()); //passing to validation
-
-
-            foreach (Book ans in ArrayForWrtie)
-            {
-                Console.WriteLine("{0,-50}{1,0}", "Title", "Author");
+                Console.WriteLine("\n{0,-50}{1,0}","Title","Author");
                 Console.WriteLine("{0,-50}{1,0}", ans.Title, ans.Author);
             }
         }
