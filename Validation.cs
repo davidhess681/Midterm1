@@ -32,7 +32,7 @@ namespace Midterm
             }
 
         }
-        public static string IsInputValidTitle(string info)
+        public static string IsInputValidTitle(string info)//validates but allows for numbers and special characters
         {
             while (true)
             {
@@ -103,7 +103,7 @@ namespace Midterm
                 if (temp = int.TryParse(userNum, out numTemp))
                 {
 
-                    if (numTemp < 0 && numTemp >= 4)
+                    if (numTemp > 0 && numTemp <= 4)
                     {
                         return numTemp;
                         //break; //do we need the break or does the return break it.
@@ -122,5 +122,7 @@ namespace Midterm
                 }
             }
         }
+
     }
+
 }
