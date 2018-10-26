@@ -21,7 +21,7 @@ namespace Midterm
             {
                 case 1:
                     {
-                        //call method
+                        ListBooks();
                         break;
                     }
                 case 2:
@@ -39,6 +39,44 @@ namespace Midterm
                         //call method for 4
                         break;
                     }
+            }
+        }
+
+        public void ListBooks()
+        {
+
+        }
+        //public static string userSearch;
+        public void SearchBookTitle()
+        {
+            string userSearch;
+            Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
+            userSearch = Validation.IsInputValid(Console.ReadLine().ToLower());
+
+            foreach(Book b in Program.Library)
+            {
+                if (b.Title.Contains(userSearch))
+                {
+
+                }
+            }
+        }
+        //using this to store book objects to write to console later per method
+        public static List<string> ArrayforWrtie = new List<string>();
+
+        //Searches for Author
+        public void SearchBookAuthor()
+        {
+            string userSearch;
+            Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
+            userSearch = Validation.IsInputValid(Console.ReadLine().ToLower());
+
+            foreach (Book b in Program.Library)
+            {
+                if (b.Author.Contains(userSearch))
+                {
+                    arr
+                }
             }
         }
         /*
