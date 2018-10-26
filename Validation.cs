@@ -9,7 +9,7 @@ namespace Midterm
     class Validation
     {
         //validates the input so that it isnt null or a number
-        public static string IsInputValid(string info)
+        public static string IsInputValidAuthor(string info)
         {
             while (true)
             {
@@ -32,6 +32,40 @@ namespace Midterm
             }
 
         }
+        public static string IsInputValidTitle(string info)
+        {
+            while (true)
+            {
+                if (string.IsNullOrEmpty(info) || info.Length > 35)
+                {
+                    Console.WriteLine("That is not correct input, try again");
+
+                }
+                return info;
+            }
+
+        }
+        public static string TitleCaseString(string sentence)
+        {
+            if (sentence == null) return sentence;//if theres no input, returns nothing
+
+            string[] words = sentence.Split(' ');
+            for (int i = 0; i < words.Length; i++)//for each word in the string
+            {
+                if (words[i].Length == 0) continue;//if length of word is 0, move to next word
+
+                char firstChar = char.ToUpper(words[i][0]);//changes the first letter of each word as upper case
+                string rest = "";
+                if (words[i].Length > 1)//for each word length thats greater than 1 letter
+                {
+                    rest = words[i].Substring(1).ToLower();//changes the rest of the word to lower case
+                }
+                words[i] = firstChar + rest;//arranges the first letter and rest of word
+            }
+            return string.Join(" ", words);//joins the words back into a sentence
+        }
+         // if (words.Contains("a","an","the","of","and","but","for","at","by","from" ))???? add?
+      
         //validates the user input as either y or n
         public static bool YesOrNo(string response)
         {
