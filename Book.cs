@@ -21,12 +21,14 @@ namespace Midterm
         }
 
         //temp const
-        public Book(string Title, string Author)
+        public Book(string title, string author)
         {
-            Title = title;
-            Author = author;
-            Status = status;
-            DueDate = dueDate;
+
+            DateTime defaultDate = new DateTime(2099, 12, 31);  // declare default datetime
+            Title = title;          // set title
+            Author = author;        // set author
+            Status = false;         // set status as false (book isn't checked out
+            DueDate = defaultDate;  // set due date to far in the future
         }
         private string title;
         public string Title
