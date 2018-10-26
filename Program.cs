@@ -18,7 +18,7 @@ namespace Midterm
 
             do
             {
-                // LibraryActions.AllSearch();
+                LibraryActions.allSearch();
             }
             while (Validation.YesOrNo(Console.ReadLine()));
 
