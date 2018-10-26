@@ -8,7 +8,9 @@ namespace Midterm
 {
     class LibraryActions
     {
-        public void allSearch()
+        //using this to store book objects to write to console later per method
+        public static List<Book> ArrayForWrtie = new List<Book>();
+        public static void allSearch()
         {
             int userNumSelect;
             bool userSelect;
@@ -26,7 +28,20 @@ namespace Midterm
                     }
                 case 2:
                     {
-                        //call method
+                        string userInputTemp = "";
+
+                        Console.WriteLine("What would you like to search.?\n\n1. By Title or 2.By Author");
+                        userInputTemp = Console.ReadLine();
+                        
+                        //going to add validation later
+                        if (userInputTemp == "1")
+                        {
+                            SearchBookTitle();
+                        }
+                        else if (userInputTemp == "2")
+                        {
+                            SearchBookAuthor();
+                        }
                         break;
                     }
                 case 3:
@@ -42,12 +57,12 @@ namespace Midterm
             }
         }
 
-        public void ListBooks()
+        public static void ListBooks()
         {
-
+            Console.WriteLine("List Book Method"); //temp
         }
         //public static string userSearch;
-        public void SearchBookTitle()
+        public static void SearchBookTitle()
         {
             string userSearch;
             Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
@@ -57,25 +72,26 @@ namespace Midterm
             {
                 if (b.Title.Contains(userSearch))
                 {
-
+                    ArrayForWrtie.Add(b);
                 }
             }
         }
-        //using this to store book objects to write to console later per method
-        public static List<string> ArrayforWrtie = new List<string>();
+
 
         //Searches for Author
-        public void SearchBookAuthor()
+        public static void SearchBookAuthor()
         {
             string userSearch;
+
+            ArrayForWrtie.Clear(); //clearing array be each search
             Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
-            userSearch = Validation.IsInputValid(Console.ReadLine().ToLower());
+            userSearch = Validation.IsInputValid(Console.ReadLine().ToLower()); //passing to validation
 
             foreach (Book b in Program.Library)
             {
-                if (b.Author.Contains(userSearch))
+                if (b.Author.Contains(userSearch)) //stores each item in array if string contains usersearch
                 {
-                    arr
+                    ArrayForWrtie.Add(b);
                 }
             }
         }
