@@ -36,11 +36,11 @@ namespace Midterm
                         //going to add validation later
                         if (userInputTemp == "1")
                         {
-                            SearchBookTitle();
+                            SearchBook("searchTitle");
                         }
                         else if (userInputTemp == "2")
                         {
-                            SearchBookAuthor();
+                            SearchBook("searchAuthor");
                         }
                         break;
                     }
@@ -55,30 +55,68 @@ namespace Midterm
                         break;
                     }
             }
+
         }
 
         public static void ListBooks()
         {
+            Console.WriteLine("\n{0,-30}{1,0}", "Title", "Author");
             foreach (Book b in Program.Library)
             {
-                Console.WriteLine("{0,-20}{1,0}", b.Title, b.Author);
+
+                Console.WriteLine("{0,-30}{1,0}", b.Title, b.Author);
             }
             
         }
         //public static string userSearch;
-        public static void SearchBookTitle()
+        public static void SearchBook(string testForIf)
         {
             string userSearch;
-            Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
-            userSearch = Validation.IsInputValidTitle
-                (Console.ReadLine().ToLower());
-
-            foreach(Book b in Program.Library)
+            string toLower;
+            switch(testForIf)
             {
-                if (b.Title.Contains(userSearch))
-                {
-                    ArrayForWrtie.Add(b);
-                }
+                case "searchTitle":
+                    {
+                        ArrayForWrtie.Clear();
+                        Console.Write("Please input keywords you wish to search for: (by book Title)");
+                        userSearch = Validation.IsInputValidTitle
+                            (Console.ReadLine().ToLower());
+
+                        foreach (Book b in Program.Library)
+                        {
+                            toLower = b.Title.ToLower();
+                            if (toLower.Contains(userSearch))
+                            {
+                                ArrayForWrtie.Add(b);
+                            }
+                        }
+                        break;
+                    }
+                case "searchAuthor":
+                    {
+                        ArrayForWrtie.Clear();
+                        Console.Write("Please input keywords you wish to search for: (by Author)");
+                        userSearch = Validation.IsInputValidTitle
+                            (Console.ReadLine().ToLower());
+                        foreach (Book b in Program.Library)
+                        {
+                            if (b.Author.Contains(userSearch)) //stores each item in array if string contains usersearch
+                            {
+                                ArrayForWrtie.Add(b);
+                            }
+                        }
+                        break;
+                    }
+                default :
+                    {
+                        break;
+                    }
+            }
+
+            foreach(Book ans in ArrayForWrtie)
+            {
+                Console.WriteLine("{0,-50}{1,0}","Title","Author");
+                Console.WriteLine("{0,-50}{1,0}", ans.Title, ans.Author);
             }
         }
 
@@ -91,12 +129,11 @@ namespace Midterm
             Console.Write("Please input keywords you wish to search for: (Author / Book Title)");
             userSearch = Validation.IsInputValidAuthor(Console.ReadLine().ToLower()); //passing to validation
 
-            foreach (Book b in Program.Library)
+
+            foreach (Book ans in ArrayForWrtie)
             {
-                if (b.Author.Contains(userSearch)) //stores each item in array if string contains usersearch
-                {
-                    ArrayForWrtie.Add(b);
-                }
+                Console.WriteLine("{0,-50}{1,0}", "Title", "Author");
+                Console.WriteLine("{0,-50}{1,0}", ans.Title, ans.Author);
             }
         }
         /*
