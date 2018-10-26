@@ -122,6 +122,35 @@ namespace Midterm
                 }
             }
         }
+        //need to validiate user number from input menu in Libary Actions.
+        public static int SelectNumBetween1And2(string userNum)
+        {
+            bool temp;
+            int numTemp;
+            while (true)
+            {
+                if (temp = int.TryParse(userNum, out numTemp))
+                {
+
+                    if (numTemp > 0 && numTemp <= 2)
+                    {
+                        return numTemp;
+                        //break; //do we need the break or does the return break it.
+                    }
+                    else
+                    {
+                        Console.Write("Invalid input, enter a number between 1 and 2.");
+                        userNum = Console.ReadLine();//changes variable and loops to top
+
+                    }
+                }
+                else
+                {
+                    Console.Write("Invalid input, enter a number between 1 and 2.");
+                    userNum = Console.ReadLine();//changes variable and loops to top
+                }
+            }
+        }
 
     }
 
