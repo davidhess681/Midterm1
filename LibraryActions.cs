@@ -9,11 +9,11 @@ namespace Midterm
     class LibraryActions
     {
         //using this to store book objects to write to console later per method
-        public static List<Book> ArrayForWrtie = new List<Book>();
+        public static List<Book> ListForWrite = new List<Book>();
+        public static bool userSelect = true;
         public static void allSearch()
         {
             int userNumSelect;
-            bool userSelect;
             Console.WriteLine("Please Choose the following opitions:\n");
             Console.WriteLine("1. List All Books\n2. Search\n3.Check Out Book" +
                 "\n4.Return Book\n5.Add Book\n6.Quit Program");
@@ -29,17 +29,17 @@ namespace Midterm
                     }
                 case 2:
                     {
-                        string userInputTemp = "";
+                        int userInputTemp = 0;
 
                         Console.Write("What would you like to search.?\n\n1. By Title or 2. By Author\nPlease Enter Number:  ");
-                        userInputTemp = Console.ReadLine();
-                        
+                        userInputTemp = Validation.SelectNumBetween1And2(Console.ReadLine());
+
                         //going to add validation later
-                        if (userInputTemp == "1")
+                        if (userInputTemp == 1)
                         {
                             SearchBook("searchTitle");
                         }
-                        else if (userInputTemp == "2")
+                        else if (userInputTemp == 2)
                         {
                             SearchBook("searchAuthor");
                         }
@@ -47,7 +47,7 @@ namespace Midterm
                     }
                 case 3:
                     {
-                        //call method return
+                        SearchBook("returnedOrCheckOut");
                         break;
                     }
                 case 4:
@@ -57,12 +57,13 @@ namespace Midterm
                     }
                 case 5:
                     {
-                        //call method add files
+
                         break;
+
                     }
                 default:
                     {
-                        // return bool to exit from main
+                        userSelect = false;
                         break;
                     }
             }
@@ -83,12 +84,13 @@ namespace Midterm
         {
             string userSearch;
             string toLower;
+            string toLowerToo;
 
             switch(testForIf)
             {
                 case "searchTitle":
                     {
-                        ArrayForWrtie.Clear();
+                        ListForWrite.Clear();
                         Console.Write("\nPlease input keywords you wish to search for: (by Title)");
                         userSearch = Validation.IsInputValidTitle
                             (Console.ReadLine().ToLower());
@@ -98,23 +100,45 @@ namespace Midterm
                             toLower = b.Title.ToLower();
                             if (toLower.Contains(userSearch))
                             {
-                                ArrayForWrtie.Add(b);
+                                ListForWrite.Add(b);
                             }
                         }
                         break;
                     }
                 case "searchAuthor":
                     {
-                        ArrayForWrtie.Clear();
+                        ListForWrite.Clear();
                         Console.Write("\nPlease input keywords you wish to search for: (by Author)");
+                        userSearch = Validation.IsInputValidAuthor
+                            (Console.ReadLine().ToLower());
+                        foreach (Book b in Program.Library)
+                        {
+                            toLowerToo = b.Author.ToLower();
+                            if (toLowerToo.Contains(userSearch)) //stores each item in array if string contains usersearch
+                            {
+                                ListForWrite.Add(b);
+                            }
+                        }
+                        break;
+                    }
+                case "returnedOrCheckOut":
+                    {
+                        ListForWrite.Clear();
+                        Console.Write("\nSearch for book: ");
                         userSearch = Validation.IsInputValidTitle
                             (Console.ReadLine().ToLower());
                         foreach (Book b in Program.Library)
                         {
-                            toLower = b.Author.ToLower();
+                            toLower = b.Title.ToLower();
+                            toLowerToo = b.Author.ToLower();
+
                             if (toLower.Contains(userSearch)) //stores each item in array if string contains usersearch
                             {
-                                ArrayForWrtie.Add(b);
+                                ListForWrite.Add(b);
+                            }
+                            else if (toLowerToo.Contains(userSearch))
+                            {
+                                ListForWrite.Add(b);
                             }
                         }
                         break;
@@ -124,43 +148,70 @@ namespace Midterm
                         break;
                     }
             }
-
-            foreach(Book ans in ArrayForWrtie)
+            if (testForIf == "searchTitle" || testForIf == "searchAuthor")
             {
-                Console.WriteLine("\n{0,-50}{1,0}","Title","Author");
-                Console.WriteLine("{0,-50}{1,0}", ans.Title, ans.Author);
-            }
-        }
-        /*
-        public bool IsCheckedOut(List<Book> stuff)
-        {
-            Program.whatever = stuff;
-        }
-        public bool ReturnABook(Book book)
-        {
-
-            if (IsCheckedOut(book))
-            {
-                Console.WriteLine("Would you like to return this book? ");
-                string response = Console.ReadLine();
-                if (Validation.YesOrNo(response))
+                Console.WriteLine("\n{0,-50}{1,0}", "Title", "Author");
+                foreach (Book ans in ListForWrite)
                 {
-                    return false;
+                    Console.WriteLine("{0,-50}{1,0}", ans.Title, ans.Author);
                 }
-                else
-                {
-                    
-                    return true;
-                }
-
             }
             else
             {
-                Console.WriteLine("This book is checked in!");
+                int i = 1;
+                int searchLength = ListForWrite.Count();
+                Console.WriteLine("\n{0,-55}{1,0}", "Title", "Author");
+                foreach (Book ans in ListForWrite)
+                {
+                    Console.WriteLine("{0,-5}{1,-50}{2,0}",i + ". ", ans.Title, ans.Author);
+                    i++;
+                }
+                Console.Write("\nSelect a book by number: ");
+                ReturnABook(ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)));
+
+            }
+        }
+
+        public static void ReturnABook(Book book)
+        {
+
+            //.WriteLine("Let's return this book!");
+            //Console.WriteLine("Would you like to search book by author");
+            //LibraryActions.SearchBook();//needs to return a Book obj
+
+            if (book.Status == false)//if the book is checked in
+            {
+                Console.WriteLine("Would you like to check out this book? ");
+                if (Validation.YesOrNo(Console.ReadLine()))
+                {
+                    book.Status = true;//if y, set as checked out, and set due date to 2 weeks from now
+                    book.DueDate = book.DueDate.AddDays(14);
+                }
+                else
+                {
+
+                    book.Status = false;//set to checked in
+                }
+
+            }
+            else //if the book is checked out
+            {
+                Console.WriteLine("Would you like to return this book?");
+                if (Validation.YesOrNo(Console.ReadLine()))
+                {
+                    book.Status = false;//if y, set book to checked in
+
+                }
+                else
+                {
+
+                    book.Status = true;//set to checked out
+                    Console.WriteLine("Your book is due on" + book.DueDate);//show due date
+                }
             }
 
 
-        }*/
+        }
 
         public LibraryActions()
         {

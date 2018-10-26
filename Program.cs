@@ -20,9 +20,8 @@ namespace Midterm
             do
             {
                 LibraryActions.allSearch();
-                Console.Write("Would you like to continue? (y/n): ");
             }
-            while (Validation.YesOrNo(Console.ReadLine()));
+            while (LibraryActions.userSelect);
 
             // Write all changes to libraryFile
             UpdateLibraryFile();
