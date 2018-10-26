@@ -11,20 +11,24 @@ namespace Midterm
     {
         static void Main(string[] args)
         {
-            
+            // populate Library based on file
             InitialStream();
 
             Console.WriteLine("Success!");
 
+            // loop through allSearch() for as long as needed
             do
             {
                 LibraryActions.allSearch();
+                Console.Write("Would you like to continue? (y/n): ");
             }
             while (Validation.YesOrNo(Console.ReadLine()));
 
+            // Write all changes to libraryFile
             UpdateLibraryFile();
             Console.WriteLine("Library file has been updated! Press any key to close.");
 
+            // end
             Console.ReadKey();
         }
 
@@ -42,12 +46,25 @@ namespace Midterm
                 string line = readLibraryFromFile.ReadLine();                   // read line from file; set to a var
                 while (line != null)        // while line isn't blank
                 {
-                    string newTitle = line;                         // set current line as title
-                    line = readLibraryFromFile.ReadLine();          // read next line
-                    string newAuthor = line;                        // set line as author
-                    Book newbook = new Book(newTitle, newAuthor);   // create book object with new title and author from file
-                    Library.Add(newbook);                           // add this book to the library list
-                    line = readLibraryFromFile.ReadLine();          // read next line
+                    try
+                    {
+                        string[] splitLine = line.Split(';');                   // parse line by semicolon
+                        string newTitle = splitLine[0];                         // set title author status and date to the respective index
+                        string newAuthor = splitLine[1]; 
+                        bool newStatus = bool.Parse(splitLine[2]);
+                        DateTime newDueDate = DateTime.Parse(splitLine[3]);
+                        Book newbook = new Book(newTitle, newAuthor, newStatus, newDueDate);   // create book object with details from file
+                        Library.Add(newbook);                           // add this book to the library list
+                        line = readLibraryFromFile.ReadLine();          // read next line
+                    }
+                    catch
+                    {
+                        // if something goes wrong with parsing status or duedate, display where it went wrong
+                        Console.WriteLine("Parsing failed at this line: " + line);
+
+                        // read next line
+                        line = readLibraryFromFile.ReadLine();
+                    }
                 }
                 readLibraryFromFile.Close();        // always be closing
                 Console.WriteLine("Populated library from file");       // temp statement to show us which action took place
@@ -56,7 +73,7 @@ namespace Midterm
                 // lists all books in library (maybe move to LibraryActions)
                 foreach (Book b in Library)
                 {
-                    Console.WriteLine("Title: {0} \t Author: {1}", b.Title, b.Author);
+                    Console.WriteLine("{0} \t{1} \t{2} \t{3}", b.Title, b.Author, b.Status, b.DueDate);
                 }
 
             }
@@ -109,8 +126,8 @@ namespace Midterm
 
                 foreach (Book b in Library)     // do this for each book
                 {
-                    createLibrary.WriteLine(b.Title);   // write book title to a new line
-                    createLibrary.WriteLine(b.Author);  // same with author
+                    // write book details to a new line
+                    createLibrary.WriteLine(b.Title + ";" + b.Author + ";" + b.Status + ";" + b.DueDate);   
                 }
                 createLibrary.Close();  // always be closing
             }

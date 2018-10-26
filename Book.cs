@@ -12,7 +12,7 @@ namespace Midterm
         {
 
         }
-        public Book(string Title, string Author, bool Status, DateTime DueDate)
+        public Book(string title, string author, bool status, DateTime dueDate)
         {
             Title = title;
             Author = author;
