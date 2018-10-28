@@ -23,8 +23,8 @@ namespace Midterm
             userNumSelect =  Validation.SelectNum(Console.ReadLine()); //validates user selection
 
             int userInputTemp = 0;
-            int binaryIndex = 0;//sets to zero. (needed ????)
             string returnAndCheckout = "";
+            bool bookFound = false;
             switch (userNumSelect) // 5 cases for the users selection on the menu
             {
                 case 1: //goes to method listbooks and returns back to main menu.
@@ -56,23 +56,9 @@ namespace Midterm
                         Console.Write("\n1. Checkout book by title. 2. Checkout book by search.\nPlease Enter Number:  ");
                         userInputTemp = Validation.SelectNumBetween1And2(Console.ReadLine()); //validation on numbers 1 and 2.
 
-                        if (userInputTemp == 1) //one directly to method after checking for book
+                        if (userInputTemp == 1) //one is directly to method after checking for book
                         {
-                            Console.Write("Enter Book Title: ");
-                            returnAndCheckout = Validation.IsInputValidTitle(Console.ReadLine());
-                            foreach (Book b in ListForWrite)
-                            {
-                                if (b.Title.ToLower() == returnAndCheckout)
-                                {
-                                    Checkout(b);
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("That Title {0} doesn't exist. Try Searching.",b.Title);
-                                }
-                            }
-
+                            IsBook();
                         }
                         else if (userInputTemp == 2) //two goes to search title part of method
                         {
@@ -90,8 +76,7 @@ namespace Midterm
 
                         if (userInputTemp == 1) //one goes to search title part of method
                         {
-                            SearchBook("searchTitle");
-
+                            IsBook();
                         }
                         else if (userInputTemp == 2) //two goes to search title part of method
                         {
@@ -118,6 +103,27 @@ namespace Midterm
                     }
             }
 
+        }
+
+        private static void IsBook()
+        {
+            string returnAndCheckout = "";
+            bool didFindBook = false;
+                    Console.Write("Enter Book Title: ");
+                    returnAndCheckout = Validation.IsInputValidTitle(Console.ReadLine());
+                    foreach (Book b in Program.Library)
+                    {
+                        if (b.Title.ToLower() == returnAndCheckout.ToLower())
+                        {
+                            didFindBook = true;
+                            Checkout(b);
+                            break;
+                        }
+                    }
+            if (didFindBook == false)
+            {
+                Console.WriteLine("\nThe Title {0} doesn't exist. Try Searching.", returnAndCheckout);
+            }
         }
 
         //lists all books in a formated way
@@ -287,7 +293,7 @@ namespace Midterm
                 {
                     book.Status = true;//if y, set as checked out, and set due date to 2 weeks from now
                     book.DueDate = book.DueDate.AddDays(14);
-                    Console.WriteLine("\nThe Book {0} has been checked out. Due date is {1}\n"
+                    Console.WriteLine("\nThe Book {0} has been checked out by you. Due date is {1}\n"
                         ,book.Title,book.DueDate);
                 }
                 else
@@ -297,8 +303,8 @@ namespace Midterm
             }
             else //if the book is checked out, tell user with due date.
             {
-                Console.WriteLine("Sorry {0} is checked out. It is due to be back on {1}." +
-                    "Press enter to continue:\n",book.Title, book.DueDate);
+                Console.WriteLine("Sorry {0} is checked out. It is due to be back on {1}.\n" +
+                    "Press enter to continue:",book.Title, book.DueDate);
                 Console.ReadLine();
             }
         }

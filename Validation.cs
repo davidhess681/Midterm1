@@ -73,15 +73,15 @@ namespace Midterm
         //validates the user input as either y or n
         public static bool YesOrNo(string response)
         {
-
+            response.ToLower();
             while (true)
             {
 
-                if (response == "y")
+                if (response == "y" || response == "yes")
                 {
                     return true;
                 }
-                else if (response == "n")
+                else if (response == "n" || response == "no")
                 {
                     return false;
                 }
@@ -110,14 +110,14 @@ namespace Midterm
                     }
                     else
                     {
-                        Console.Write("Invalid input, enter a number between 1 and 4.");
+                        Console.Write("Invalid input, enter a number between 1 and 6.");
                         userNum = Console.ReadLine();//changes variable and loops to top
 
                     }
                 }
                 else
                 {
-                    Console.Write("Invalid input, enter a number between 1 and 4.");
+                    Console.Write("Invalid input, enter a number between 1 and 6.");
                     userNum = Console.ReadLine();//changes variable and loops to top
                 }
             }
