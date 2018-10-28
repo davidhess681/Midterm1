@@ -268,59 +268,48 @@ namespace Midterm
 
         public static void ReturnABook(Book book)
         {
-            Console.WriteLine("Let's return this book!");
+            //Do we need to check in if the book is already checked it or not???????
 
-            if (book.Status == false)//if the book is checked in
+            if (book.Status == true)//if the book is checked in
             {
-                Console.WriteLine("This book is already checked in.");
-                if (Validation.YesOrNo(Console.ReadLine()))
-                {
-                    book.Status = true;//if y, set as checked out, and set due date to 2 weeks from now
-                    book.DueDate = book.DueDate.AddDays(14);
-                }
-                else
-                {
-
-                    book.Status = false;//set to checked in
-                }
-
+                Console.WriteLine("This book {0} is already checked in. Press Enter to continue", 
+                    book.Title);
+                Console.ReadLine();
             }
             else //if the book is checked out
             {
-                Console.WriteLine("Would you like to return this book?");
+                Console.WriteLine("Are you sure you want to return {0}? Type 'yes' or 'no'",book.Title);
                 if (Validation.YesOrNo(Console.ReadLine()))
                 {
-                    book.Status = false;//if y, set book to checked in
-
+                    book.Status = true; //if y, set as checked in
+                    Console.WriteLine("\nThe Book {0} has been returned. Thank You!"
+                        , book.Title);
                 }
                 else
                 {
-
-                    book.Status = true;//set to checked out
-                    Console.WriteLine("Your book is due on" + book.DueDate);//show due date
+                    book.Status = false;//set to not returned
                 }
             }
-
-
         }
 
         public static void Checkout(Book book)
         {
            
-            if (book.Status == false)//if the book is checked in
+            if (book.Status == true)//if the book is checked in
             {
                 Console.WriteLine("Would you like to check out {0} by {1}?" +
                     " \nEnter 'Yes' or 'No'",book.Title, book.Author);
                 if (Validation.YesOrNo(Console.ReadLine()))
                 {
-                    book.Status = true;//if y, set as checked out, and set due date to 2 weeks from now
+                    book.Status = false;//if y, set as checked out, and set due date to 2 weeks from now
+                    book.DueDate = DateTime.Now;
                     book.DueDate = book.DueDate.AddDays(14);
                     Console.WriteLine("\nThe Book {0} has been checked out by you. Due date is {1}\n"
                         ,book.Title,book.DueDate);
                 }
                 else
                 {
-                    book.Status = false;//set to checked in
+                    book.Status = true;//set to checked in
                 }
             }
             else //if the book is checked out, tell user with due date.
