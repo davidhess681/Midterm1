@@ -15,14 +15,17 @@ namespace Midterm
         public static void allSearch()
         {
             int userNumSelect;
-            int userInputTemp = 0; //sets to zero. (needed ????)
-            Console.WriteLine("Please choose a number of the following opitions:\n");
+
+            Console.WriteLine("\n\nPlease choose a number of the following opitions:\n");
             Console.WriteLine("1. List All Books\n2. Search\n3. Check Out Book" +
-                "\n4. Return Book\n5. Add Book\n6.Quit Program");
+                "\n4. Return Book\n5. Add Book\n6. Quit Program");
             Console.Write("\nPlease enter a menu number: ");
             userNumSelect =  Validation.SelectNum(Console.ReadLine()); //validates user selection
 
-            switch(userNumSelect) // 5 cases for the users selection on the menu
+            int userInputTemp = 0;
+            int binaryIndex = 0;//sets to zero. (needed ????)
+            string returnAndCheckout = "";
+            switch (userNumSelect) // 5 cases for the users selection on the menu
             {
                 case 1: //goes to method listbooks and returns back to main menu.
                     {
@@ -53,17 +56,31 @@ namespace Midterm
                         Console.Write("\n1. Checkout book by title. 2. Checkout book by search.\nPlease Enter Number:  ");
                         userInputTemp = Validation.SelectNumBetween1And2(Console.ReadLine()); //validation on numbers 1 and 2.
 
-                        if (userInputTemp == 1) //one goes to search title part of method
+                        if (userInputTemp == 1) //one directly to method after checking for book
                         {
-                            SearchBook("searchTitle");
+                            Console.Write("Enter Book Title: ");
+                            returnAndCheckout = Validation.IsInputValidTitle(Console.ReadLine());
+                            foreach (Book b in ListForWrite)
+                            {
+                                if (b.Title.ToLower() == returnAndCheckout)
+                                {
+                                    Checkout(b);
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("That Title {0} doesn't exist. Try Searching.",b.Title);
+                                }
+                            }
+
                         }
                         else if (userInputTemp == 2) //two goes to search title part of method
                         {
                             SearchBook("returnedOrCheckOut"); // goes to search title part of method that returns book.
-                            break;
                         }
-
+                        break;
                     }
+
                 case 4: //needs to be returned part of book
                     {
                         userInputTemp = 0; //sets to zero. (needed ????)
@@ -74,12 +91,13 @@ namespace Midterm
                         if (userInputTemp == 1) //one goes to search title part of method
                         {
                             SearchBook("searchTitle");
+
                         }
                         else if (userInputTemp == 2) //two goes to search title part of method
                         {
                             SearchBook("returnedOrCheckOut"); // goes to search title part of method that returns book.
-                            break;
                         }
+                        break;
                     }
                 case 5:
                     {
@@ -87,9 +105,9 @@ namespace Midterm
                         break;
 
                     }
-                case 6:
+                case 6: //case to end the program.
                     {
-                        userSelect = false; //case to end the program.
+                        userSelect = false; 
                         break;
 
                     }
@@ -213,7 +231,7 @@ namespace Midterm
 
                 //calls Returnbook method to return a book at the List element based on search results that is counted by i for each result then takes user input to get that book number..
                 //also passes through validation method and class.
-                ReturnABook(ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)));
+                Checkout(ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)));
             }
         }
 
@@ -256,6 +274,33 @@ namespace Midterm
             }
 
 
+        }
+
+        public static void Checkout(Book book)
+        {
+           
+            if (book.Status == false)//if the book is checked in
+            {
+                Console.WriteLine("Would you like to check out {0} by {1}?" +
+                    " \nEnter 'Yes' or 'No'",book.Title, book.Author);
+                if (Validation.YesOrNo(Console.ReadLine()))
+                {
+                    book.Status = true;//if y, set as checked out, and set due date to 2 weeks from now
+                    book.DueDate = book.DueDate.AddDays(14);
+                    Console.WriteLine("\nThe Book {0} has been checked out. Due date is {1}\n"
+                        ,book.Title,book.DueDate);
+                }
+                else
+                {
+                    book.Status = false;//set to checked in
+                }
+            }
+            else //if the book is checked out, tell user with due date.
+            {
+                Console.WriteLine("Sorry {0} is checked out. It is due to be back on {1}." +
+                    "Press enter to continue:\n",book.Title, book.DueDate);
+                Console.ReadLine();
+            }
         }
 
         //empty constuctor
