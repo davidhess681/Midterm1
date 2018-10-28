@@ -84,7 +84,7 @@ namespace Midterm
                     }
                 case 5:
                     {
-                        //add a book goes here
+                        TempForCode.AddABook();
                         break;
 
                     }

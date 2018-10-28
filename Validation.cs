@@ -18,7 +18,7 @@ namespace Midterm
                     Console.WriteLine("That is not correct input, try again");
 
                 }
-
+                //NOT ALLOWING SPACES???
                 foreach (char item in info)
                 {
                     if (!char.IsLetter(item))
