@@ -18,7 +18,7 @@ namespace Midterm
             // loop through allSearch() for as long as needed
             do
             {
-                LibraryActions.allSearch();
+                LibraryActions.Menu();
             }
             while (LibraryActions.userSelect);
 
