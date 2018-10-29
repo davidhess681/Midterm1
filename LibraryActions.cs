@@ -72,11 +72,11 @@ namespace Midterm
         //lists all books in a formated way
         private static void ListBooks()
         {
-            Console.WriteLine("\n{0,-30}{1,0}", "Title", "Author");
-            Console.WriteLine("==========================================================");
+            Console.WriteLine("\n{0,-50}{1,0}", "Title", "Author");
+            Console.WriteLine("=======================================================================");
             foreach (Book b in Program.Library)
             {
-                Console.WriteLine("{0,-30}{1,0}", b.Title, b.Author);
+                Console.WriteLine("{0,-50}{1,0}", b.Title, b.Author);
             }
 
         }
@@ -256,7 +256,7 @@ namespace Midterm
             else if (titleOrAuthor == "searchTitle" || checkoutOrReturnCase == "searchAuthor")
             {
                 Console.WriteLine("\n{0,-50}{1,0}", "Title", "Author");
-                Console.WriteLine("==========================================================");
+                Console.WriteLine("=======================================================================");
                 foreach (Book ans in ListForWrite)
                 {
                     Console.WriteLine("{0,-50}{1,0}", ans.Title, ans.Author);
@@ -269,7 +269,7 @@ namespace Midterm
                 int searchLength = ListForWrite.Count(); //counts how many items in list
 
                 Console.WriteLine("\n{0,-55}{1,0}", "Title", "Author");
-                Console.WriteLine("==========================================================");
+                Console.WriteLine("=======================================================================");
                 foreach (Book ans in ListForWrite)
                 {
                     Console.WriteLine("{0,-5}{1,-50}{2,0}", i + ". ", ans.Title, ans.Author); //sets space for 4 digit number and also for author and title
