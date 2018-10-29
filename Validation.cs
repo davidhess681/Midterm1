@@ -17,7 +17,7 @@ namespace Midterm
                 {
                     Console.WriteLine("That is not correct input, try again");
                     info = Console.ReadLine();
-
+                    continue;
                 }
                 else
                 {
