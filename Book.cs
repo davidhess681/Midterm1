@@ -20,10 +20,8 @@ namespace Midterm
             DueDate = dueDate;
         }
 
-        //temp const
         public Book(string title, string author)
         {
-
             DateTime defaultDate = new DateTime(2099, 12, 31);  // declare default datetime
             Title = title;          // set title
             Author = author;        // set author
@@ -107,8 +105,6 @@ namespace Midterm
         }
         public void Return()
         {
-            //Do we need to check in if the book is already checked it or not???????
-
             if (Status == false)//if the book is checked in
             {
                 Console.WriteLine("This book {0} is already checked in.",

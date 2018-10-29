@@ -304,11 +304,6 @@ namespace Midterm
             Console.WriteLine("Book added to list");
         }
 
-        //empty constuctor
-        public LibraryActions()
-        {
-
-        }
     }
 }
 

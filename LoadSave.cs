@@ -12,6 +12,7 @@ namespace Midterm
         static string fileLib = @"c:/temp/libraryFile.txt";
         public static void InitialStream()
         {
+            Directory.CreateDirectory(@"c:\temp");
             // check if file exists
             if (File.Exists(fileLib))
             {
