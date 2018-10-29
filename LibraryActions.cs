@@ -22,74 +22,76 @@ namespace Midterm
             Console.WriteLine("1. List All Books\n2. Search\n3. Checkout Book" +
                 "\n4. Return Book\n5. Add Book\n6. Quit Program");
             Console.Write("\nPlease enter a menu number: ");
-            userNumSelectMenu =  Validation.SelectNum(Console.ReadLine()); //validates user selection
+            userNumSelectMenu =  Validation.SelectNum();                //validates user selection
 
             int subMenuUserInput = 0;
-            switch (userNumSelectMenu) // 5 cases for the users selection on the menu
+            switch (userNumSelectMenu)                                  // 6 cases for the users selection on the menu
             {
-                case 1: //goes to method listbooks and returns back to main menu.
+                case 1:                                                 //goes to method listbooks and returns back to main menu.
                     {
                         ListBooks(); 
                         break;
                     }
-                case 2: //goes to search method, calls search method and passes in a string (these strings could be enums??)
+                case 2:                                                 //goes to search method, calls search method and passes in a string (these strings could be enums??)
                     {
-                        subMenuUserInput = 0; //sets to zero. (needed ????)
+                        subMenuUserInput = 0;                           //sets to zero. (needed ????)
 
-                        Console.Write("What would you like to search.?\n\n1. By Title or 2. By Author\nPlease Enter Number:  ");
-                        subMenuUserInput = Validation.SelectNumBetween1And2(Console.ReadLine()); //validation on numbers 1 and 2.
+                        Console.Write("What would you like to search.?\n\n1. " +
+                            "By Title or 2. By Author\nPlease Enter Number:  ");
+                            subMenuUserInput = Validation.SelectNumBetween1And2(); //validation on numbers 1 and 2.
 
-                        if (subMenuUserInput == 1) //one goes to search title part of method
+                        if (subMenuUserInput == 1)                      //one goes to search title part of method
                         {
                             SearchBook("searchTitle","");
                         }
-                        else if (subMenuUserInput == 2) //two goes to search title part of method
+                        else if (subMenuUserInput == 2)                 //two goes to search title part of method
                         {
                             SearchBook("searchAuthor","");
                         }
-                        break; //returns to main menu
+                        break;
                     }
-                case 3: //check out book. asks to input book name title or search for book
+                case 3:                                                 //check out book. asks to input book name title or search for book
                     {
-                        subMenuUserInput = 0; //sets to zero. (needed ????)
+                        subMenuUserInput = 0;                           //sets to zero. (needed ????)
 
-                        Console.Write("\n1. Checkout book by title. 2. Checkout book by search.\nPlease Enter Number:  ");
-                        subMenuUserInput = Validation.SelectNumBetween1And2(Console.ReadLine()); //validation on numbers 1 and 2.
+                        Console.Write("\n1. Checkout book by title. " +
+                            "2. Checkout book by search.\nPlease Enter Number:  ");
+                            subMenuUserInput = Validation.SelectNumBetween1And2(); //validation on numbers 1 and 2.
 
-                        if (subMenuUserInput == 1) //one is directly to method after checking for book
+                        if (subMenuUserInput == 1)                      //one is directly to method after checking for book
                         {
                             IsBook("checkout");
                         }
-                        else if (subMenuUserInput == 2) //two goes to search title part of method
+                        else if (subMenuUserInput == 2)                  //two goes to search title part of method
                         {
                             SearchBook("returnedOrCheckOut","checkout"); // goes to search title part of method that returns book.
                         }
                         break;
                     }
 
-                case 4: //needs to be returned part of book
+                case 4:                                                  //needs to be returned part of book
                     {
-                        subMenuUserInput = 0; //sets to zero. (needed ????)
+                        subMenuUserInput = 0;                           //sets to zero. (needed ????)
 
                         Console.Write("\n1. Return book by title. 2. Return book by search.\nPlease Enter Number:  ");
-                        subMenuUserInput = Validation.SelectNumBetween1And2(Console.ReadLine()); //validation on numbers 1 and 2.
+                        subMenuUserInput = Validation.SelectNumBetween1And2(); //validation on numbers 1 and 2.
 
-                        if (subMenuUserInput == 1) //one goes to search title part of method
+                        if (subMenuUserInput == 1)                      //one goes to search title part of method
                         {
                             IsBook("return");
                         }
-                        else if (subMenuUserInput == 2) //two goes to search title part of method
+                        else if (subMenuUserInput == 2)                 //two goes to search title part of method
                         {
-                            SearchBook("returnedOrCheckOut","return"); // goes to search title part of method that returns book.
+                            SearchBook("returnedOrCheckOut","return");  // goes to search title part of method that returns book.
                         }
                         break;
                     }
-                case 5:
+                case 5:                                                 //case to add book
                     {
                         AddABook();
                         break;
                     }
-                case 6: //case to end the program.
+                case 6:                                                 //case to end the program.
                     {
                         userSelectedQuit = false; 
                         break;
@@ -105,7 +107,7 @@ namespace Midterm
             Console.ReadLine();
         }
 
-        //method to check for book in list for return and checkout actions 1 in allList method
+                                                                        //method to check for book in list for return and checkout actions 1 in allList method
         private static void IsBook(string checkoutOrReturnCase)
         {
             string userInput = "";
@@ -128,17 +130,17 @@ namespace Midterm
                     }
 
                  didFindBook = true;
-                 break; //breaks out of the first true, does not continue for each
+                 break;                                                 //breaks out of the first true, does not continue for each
                 }
             }
 
-            if (didFindBook == false) //if the foreach return nothing then write the line
+            if (didFindBook == false)                                   //if the foreach return nothing then write the line
             {
                 Console.WriteLine("\nThe Title {0} doesn't exist. Try Searching.", userInput);
             }
         }
 
-        //lists all books in a formated way
+                                                                        //lists all books in a formated way
         private static void ListBooks() 
         {
             Console.WriteLine("\n{0,-30}{1,0}", "Title", "Author");
@@ -149,22 +151,21 @@ namespace Midterm
             }
             
         }
-        //public static string userSearch;
+                                                                        //public static string userSearch;
         public static void SearchBook(string titleOrAuthor, string checkoutOrReturnCase)
         {
             string userSearch;
             string toLowerTitle;
             string toLowerAuthor;
-            ListForWrite.Clear(); //clears list for multiple loops
+            ListForWrite.Clear();                                       //clears list for multiple loops
             switch(titleOrAuthor)
             {
-                case "searchTitle": //case for searching for title by key word
+                case "searchTitle":                                     //case for searching for title by key word
                     {
                         Console.Write("\nPlease input keywords you wish to search for: (by Title)");
-                        userSearch = Validation.IsInputValidTitle //goes to validation
-                            (Console.ReadLine().ToLower());
+                        userSearch = Validation.IsInputValidTitle();    //goes to validation
 
-                        foreach (Book b in Program.Library) //loop that looks for title keyword match and adds it to List.
+                        foreach (Book b in Program.Library)             //loop that looks for title keyword match and adds it to List.
                         {
                             toLowerTitle = b.Title.ToLower();
                             if (toLowerTitle.Contains(userSearch))
@@ -177,8 +178,7 @@ namespace Midterm
                 case "searchAuthor":
                     {
                         Console.Write("\nPlease input keywords you wish to search for: (by Author)");
-                        userSearch = Validation.IsInputValidAuthor //goes to validation
-                            (Console.ReadLine().ToLower());
+                        userSearch = Validation.IsInputValidAuthor(); //goes to validation
 
                         foreach (Book b in Program.Library) //loop that looks for author keyword match and adds it to List.
                         {
@@ -193,8 +193,7 @@ namespace Midterm
                 case "returnedOrCheckOut":
                     {
                         Console.Write("\nSearch for book: ");
-                        userSearch = Validation.IsInputValidTitle //goes to validation 
-                            (Console.ReadLine().ToLower());
+                        userSearch = Validation.IsInputValidTitle(); //goes to validation 
 
                         foreach (Book b in Program.Library) //loop that looks for title and author match and adds it to List.
                         {
@@ -257,11 +256,11 @@ namespace Midterm
                 //also passes through validation method and class.
                 if (checkoutOrReturnCase == "checkout")
                 {
-                    ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)).Checkout();
+                    ListForWrite.ElementAt(Validation.SelectFromSearch(searchLength)).Checkout();
                 }
                 else if (checkoutOrReturnCase == "return")
                 {
-                    ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)).Return();
+                    ListForWrite.ElementAt(Validation.SelectFromSearch(searchLength)).Return();
                 }
             }
         }
@@ -269,11 +268,9 @@ namespace Midterm
         public static void AddABook()
         {
             Console.Write("\nWhat is the Title of the Book you want to add? ");
-            string newTitle = Validation.IsInputValidTitle(Console.ReadLine());
+            string newTitle = Validation.TitleCaseString();
             Console.Write("\nWhat is the Author of the book you want to add? ");
-            //validation not right here???
-            string newAuthor = Validation.IsInputValidAuthor(Console.ReadLine());
-
+            string newAuthor = Validation.TitleCaseString();
 
             Book newBook = new Book(newTitle, newAuthor);
 

@@ -84,7 +84,7 @@ namespace Midterm
             {
                 Console.WriteLine("Would you like to check out {0} by {1}?" +
                     " \nEnter 'Yes' or 'No'", Title, Author);
-                if (Validation.YesOrNo(Console.ReadLine()))
+                if (Validation.YesOrNo())
                 {
                     Status = true;//if y, set as checked out, and set due date to 2 weeks from now
                     DueDate = DateTime.Now;
@@ -117,7 +117,7 @@ namespace Midterm
             else //if the book is checked out
             {
                 Console.WriteLine("Are you sure you want to return {0}? Type 'yes' or 'no'", Title);
-                if (Validation.YesOrNo(Console.ReadLine()))
+                if (Validation.YesOrNo())
                 {
                     Status = false; //if y, set as checked in
                     Console.WriteLine("\nThe Book {0} has been returned. Thank You!"
