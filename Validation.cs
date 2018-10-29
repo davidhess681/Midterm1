@@ -30,7 +30,7 @@ namespace Midterm
                         else if (!char.IsLetter(item))//but any other special characters/numbers = error
                         {
                             Console.WriteLine("You must use alphabetical characters, try again ");
-                            continue;
+                            break;
                         }
                     }
                 }
