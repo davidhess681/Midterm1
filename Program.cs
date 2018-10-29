@@ -20,7 +20,7 @@ namespace Midterm
             {
                 LibraryActions.Menu();
             }
-            while (LibraryActions.userSelect);
+            while (LibraryActions.userSelectedQuit);
 
             // Write all changes to libraryFile
             LoadSave.UpdateLibraryFile();
