@@ -19,7 +19,7 @@ namespace Midterm
 
             Console.Clear();
             Console.Beep();
-            Console.WriteLine("Please choose a number of the following opitions:\n");
+            Console.WriteLine("Please choose a number of the following options:\n");
             Console.WriteLine("1. List All Books\n2. Search\n3. Checkout Book" +
                 "\n4. Return Book\n5. Add Book\n6. Quit Program");
             Console.Write("\nPlease enter a menu number: ");
