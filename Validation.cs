@@ -16,7 +16,7 @@ namespace Midterm
                 string info = Console.ReadLine().ToLower();
                 if (string.IsNullOrEmpty(info) || info.Length > 35)//if null or too long, error
                 {
-                    Console.WriteLine("That is not correct input, try again");
+                    Console.Write("That is not correct input, try again: ");
                     continue;
                 }
                 else
@@ -44,7 +44,7 @@ namespace Midterm
                 string info = Console.ReadLine().ToLower();
                 if (string.IsNullOrEmpty(info) || info.Length > 35)//if null or too long, error
                 {
-                    Console.WriteLine("That is not correct input, try again");
+                    Console.Write("That is not correct input, try again: ");
                     
                     continue;
                 }
@@ -58,7 +58,7 @@ namespace Midterm
                 string sentence = Console.ReadLine();
                 if (sentence == null)
                 {
-                    Console.WriteLine("Error, please enter a sentence"); //if theres no input, returns nothing
+                    Console.Write("Error, please enter a title: "); //if theres no input, returns nothing
                     continue;
                 }
                 char firstChar;
@@ -95,7 +95,7 @@ namespace Midterm
                 }
                 else
                 {
-                    Console.Write("Invalid input, try with yes or no:");
+                    Console.Write("Invalid input, try with yes or no: ");
                     continue;
                     //loops to top
                 }
@@ -117,14 +117,14 @@ namespace Midterm
                     }
                     else
                     {
-                        Console.Write("Invalid input, enter a number between 1 and 6.");
+                        Console.Write("Invalid input, enter a number between 1 and 6: ");
                         continue;
                         //loops to top
                     }
                 }
                 else
                 {
-                    Console.Write("Invalid input, enter a number between 1 and 6.");
+                    Console.Write("Invalid input, enter a number between 1 and 6: ");
                     continue;
                     //loops to top
                 }
@@ -146,13 +146,13 @@ namespace Midterm
                     }
                     else
                     {
-                        Console.Write("Invalid input, enter a number between 1 and 2.");
+                        Console.Write("Invalid input, enter a number between 1 and 2: ");
                         continue;
                     }
                 }
                 else
                 {
-                    Console.Write("Invalid input, enter a number between 1 and 2.");
+                    Console.Write("Invalid input, enter a number between 1 and 2: ");
                     continue;
                 }
             }
