@@ -13,75 +13,88 @@ namespace Midterm
         {
             while (true)
             {
-                if (string.IsNullOrEmpty(info) || info.Length > 35)
+                if (string.IsNullOrEmpty(info) || info.Length > 35)//if null or too long, error
                 {
                     Console.WriteLine("That is not correct input, try again");
+                    info = Console.ReadLine();
 
                 }
-                //NOT ALLOWING SPACES???
-                foreach (char item in info)
+                else
                 {
-                    if (!char.IsLetter(item))
+                    foreach (char item in info)
                     {
-                        Console.WriteLine("You must use alphabetical characters, try again ");
-
+                        if (item == char.Parse(" ") || item == char.Parse("-"))//if name has a space or is hyphenated, continue
+                        {
+                            continue;
+                        }
+                        else if (!char.IsLetter(item))//but any other special characters/numbers = error
+                        {
+                            Console.WriteLine("You must use alphabetical characters, try again ");
+                            info = Console.ReadLine();
+                        }
                     }
                 }
-
                 return info;
             }
-
         }
         public static string IsInputValidTitle(string info)//validates but allows for numbers and special characters
         {
             while (true)
             {
-                if (string.IsNullOrEmpty(info) || info.Length > 35)
+                if (string.IsNullOrEmpty(info) || info.Length > 35)//if null or too long, error
                 {
                     Console.WriteLine("That is not correct input, try again");
-
+                    info = Console.ReadLine();
+                    continue;
                 }
-                return info;
+                return info;//allows for all numbers and special characters
             }
-
         }
         public static string TitleCaseString(string sentence)
         {
-            if (sentence == null) return sentence;//if theres no input, returns nothing
-
-            char firstChar;
-            string[] words = sentence.Split(' ');
-            for (int i = 0; i < words.Length; i++)//for each word in the string
+            while (true)
             {
-                if (words[i].Length == 0) continue;//if length of word is 0, move to next word
-
-                //if (words[i] != ("a"||"an"||"the"||"of" ||"and"||"but"||"for"||"at"||"by"||"from"))
-                //{
-                firstChar = char.ToUpper(words[i][0]);//changes the first letter of each word as upper case
-                //}
-                string rest = "";
-                if (words[i].Length > 1)//for each word length thats greater than 1 letter
+                if (sentence == null)
                 {
-                    rest = words[i].Substring(1).ToLower();//changes the rest of the word to lower case
+                    Console.WriteLine("Error, please enter a sentence"); //if theres no input, returns nothing
+                    sentence = Console.ReadLine();
                 }
-                words[i] = firstChar + rest;//arranges the first letter and rest of word
+                char firstChar;
+                string[] words = sentence.Split(' ');
+                for (int i = 0; i < words.Length; i++)               //for each word in the string
+                {
+                    if (words[i].Length == 0) continue;              //if length of word is 0, move to next word
+
+                    if (words[i] == "a" || words[i] == "an" || words[i] == "the" || words[i] == "of" || words[i] == "and" || words[i] == "but" || words[i] == "for" || words[i] == "at" || words[i] == "by" || words[i] == "from" || words[i] == "to")
+                    {
+                        string shortWord = words[i].ToLower();       //converts designated short words to lowercase
+                        continue;
+                    }
+                    else
+                    {
+                        firstChar = char.ToUpper(words[i][0]);      //changes the first letter of each word as upper case
+                        string rest = "";
+                        if (words[i].Length > 1)                    //for each word length thats greater than 1 letter
+                        {
+                            rest = words[i].Substring(1).ToLower(); //changes the rest of the word to lower case
+                        }
+                        words[i] = firstChar + rest;                //arranges the first letter and rest of word
+                    }
+                }
+                return string.Join(" ", words);                     //joins all the words back into a sentence
             }
-            return string.Join(" ", words);//joins the words back into a sentence
         }
-         // if (words.Contains("a","an","the","of","and","but","for","at","by","from" ))???? add?
-      
+
         //validates the user input as either y or n
         public static bool YesOrNo(string response)
         {
-            response.ToLower();
             while (true)
             {
-
-                if (response == "y" || response == "yes")
+                if (response == "y")
                 {
                     return true;
                 }
-                else if (response == "n" || response == "no")
+                else if (response == "n")
                 {
                     return false;
                 }
@@ -89,7 +102,6 @@ namespace Midterm
                 {
                     Console.Write("Invalid input, try (y/n): ");
                     response = Console.ReadLine().ToLower();//changes variable and loops to top
-
                 }
             }
         }
@@ -102,22 +114,19 @@ namespace Midterm
             {
                 if (temp = int.TryParse(userNum, out numTemp))
                 {
-
-                    if (numTemp > 0 && numTemp <= 6)
+                    if (numTemp > 0 && numTemp <= 4)
                     {
                         return numTemp;
-                        //break; //do we need the break or does the return break it.
                     }
                     else
                     {
-                        Console.Write("Invalid input, enter a number between 1 and 6.");
+                        Console.Write("Invalid input, enter a number between 1 and 4.");
                         userNum = Console.ReadLine();//changes variable and loops to top
-
                     }
                 }
                 else
                 {
-                    Console.Write("Invalid input, enter a number between 1 and 6.");
+                    Console.Write("Invalid input, enter a number between 1 and 4.");
                     userNum = Console.ReadLine();//changes variable and loops to top
                 }
             }
@@ -131,17 +140,14 @@ namespace Midterm
             {
                 if (temp = int.TryParse(userNum, out numTemp))
                 {
-
                     if (numTemp > 0 && numTemp <= 2)
                     {
                         return numTemp;
-                        //break; //do we need the break or does the return break it.
                     }
                     else
                     {
                         Console.Write("Invalid input, enter a number between 1 and 2.");
                         userNum = Console.ReadLine();//changes variable and loops to top
-
                     }
                 }
                 else
@@ -161,9 +167,9 @@ namespace Midterm
                 if (temp = int.TryParse(userNum, out numTemp))
                 {
 
-                    if (numTemp -1 >= 0 && numTemp <= searchLength)
+                    if (numTemp - 1 >= 0 && numTemp <= searchLength)
                     {
-                        return numTemp -1;
+                        return numTemp - 1;
                         //break; //do we need the break or does the return break it.
                     }
                     else
