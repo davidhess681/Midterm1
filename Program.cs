@@ -14,6 +14,7 @@ namespace Midterm
             LoadSave.InitialStream();
 
             Console.WriteLine("Success!");
+            System.Threading.Thread.Sleep(2000);
 
             // loop through allSearch() for as long as needed
             do
