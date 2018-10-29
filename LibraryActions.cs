@@ -117,11 +117,11 @@ namespace Midterm
                 {
                     if(checkoutOrReturnCase == "checkout")
                     {
-                        Checkout(b);
+                        b.Checkout();
                     }
                     else if(checkoutOrReturnCase == "return")
                     {
-                        ReturnABook(b);
+                        b.Return();
                     }
 
                  didFindBook = true;
