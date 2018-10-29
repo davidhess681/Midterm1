@@ -103,7 +103,7 @@ namespace Midterm
         }
 
         //method to check for book in list for return and checkout actions 1 in allList method
-        private static void IsBook(string checkoutOrReturn)
+        private static void IsBook(string checkoutOrReturnCase)
         {
             string userInput = "";
             bool didFindBook = false;
@@ -115,11 +115,11 @@ namespace Midterm
             {
                 if (b.Title.ToLower() == userInput.ToLower())
                 {
-                    if(userInput == "checkout")
+                    if(checkoutOrReturnCase == "checkout")
                     {
                         Checkout(b);
                     }
-                    else if(userInput == "return")
+                    else if(checkoutOrReturnCase == "return")
                     {
                         ReturnABook(b);
                     }
@@ -131,7 +131,7 @@ namespace Midterm
 
             if (didFindBook == false) //if the foreach return nothing then write the line
             {
-                Console.WriteLine("\nThe Title {0} doesn't exist. Try Searching.", returnAndCheckout);
+                Console.WriteLine("\nThe Title {0} doesn't exist. Try Searching.", userInput);
             }
         }
 
@@ -257,66 +257,12 @@ namespace Midterm
                 //also passes through validation method and class.
                 if (testForElseIf == "checkout")
                 {
-                    Checkout(ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)));
+                    ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)).Checkout();
                 }
                 else if (testForElseIf == "return")
                 {
-                    ReturnABook(ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)));
+                    ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)).Return();
                 }
-            }
-        }
-
-        public static void ReturnABook(Book book)
-        {
-            //Do we need to check in if the book is already checked it or not???????
-
-            if (book.Status == true)//if the book is checked in
-            {
-                Console.WriteLine("This book {0} is already checked in. Press Enter to continue", 
-                    book.Title);
-                Console.ReadLine();
-            }
-            else //if the book is checked out
-            {
-                Console.WriteLine("Are you sure you want to return {0}? Type 'yes' or 'no'",book.Title);
-                if (Validation.YesOrNo(Console.ReadLine()))
-                {
-                    book.Status = true; //if y, set as checked in
-                    Console.WriteLine("\nThe Book {0} has been returned. Thank You!"
-                        , book.Title);
-                }
-                else
-                {
-                    book.Status = false;//set to not returned
-                }
-            }
-        }
-
-        public static void Checkout(Book book)
-        {
-           
-            if (book.Status == true)//if the book is checked in
-            {
-                Console.WriteLine("Would you like to check out {0} by {1}?" +
-                    " \nEnter 'Yes' or 'No'",book.Title, book.Author);
-                if (Validation.YesOrNo(Console.ReadLine()))
-                {
-                    book.Status = false;//if y, set as checked out, and set due date to 2 weeks from now
-                    book.DueDate = DateTime.Now;
-                    book.DueDate = book.DueDate.AddDays(14);
-                    Console.WriteLine("\nThe Book {0} has been checked out by you. Due date is {1}\n"
-                        ,book.Title,book.DueDate);
-                }
-                else
-                {
-                    book.Status = true;//set to checked in
-                }
-            }
-            else //if the book is checked out, tell user with due date.
-            {
-                Console.WriteLine("Sorry {0} is checked out. It is due to be back on {1}.\n" +
-                    "Press enter to continue:",book.Title, book.DueDate);
-                Console.ReadLine();
             }
         }
 
