@@ -13,7 +13,7 @@ namespace Midterm
         {
             while (true)
             {
-                string info = Console.ReadLine();
+                string info = Console.ReadLine().ToLower();
                 if (string.IsNullOrEmpty(info) || info.Length > 35)//if null or too long, error
                 {
                     Console.WriteLine("That is not correct input, try again");
@@ -37,14 +37,15 @@ namespace Midterm
                 return info;
             }
         }
-        public static string IsInputValidTitle(string info)//validates but allows for numbers and special characters
+        public static string IsInputValidTitle()//validates but allows for numbers and special characters
         {
             while (true)
             {
+                string info = Console.ReadLine().ToLower();
                 if (string.IsNullOrEmpty(info) || info.Length > 35)//if null or too long, error
                 {
                     Console.WriteLine("That is not correct input, try again");
-                    info = Console.ReadLine();
+                    
                     continue;
                 }
                 return info;//allows for all numbers and special characters
@@ -83,12 +84,12 @@ namespace Midterm
         {
             while (true)
             {
-                string response = Console.ReadLine();
-                if (response.ToLower() == "y" || response.ToLower() == "yes")
+                string response = Console.ReadLine().ToLower();
+                if (response == "y" || response == "yes")
                 {
                     return true;
                 }
-                else if (response.ToLower() == "n" || response.ToLower() == "no")
+                else if (response== "n" || response == "no")
                 {
                     return false;
                 }
