@@ -61,25 +61,17 @@ namespace Midterm
                 }
                 char firstChar;
                 string[] words = sentence.Split(' ');
-                for (int i = 0; i < words.Length; i++)               //for each word in the string
+                for (int i = 0; i < words.Length; i++)              //for each word in the string
                 {
-                    if (words[i].Length == 0) continue;              //if length of word is 0, move to next word
+                    if (words[i].Length == 0) continue;             //if length of word is 0, move to next word
+                    firstChar = char.ToUpper(words[i][0]);          //changes the first letter of each word as upper case
+                    string rest = "";
+                    if (words[i].Length > 1)                        //for each word length thats greater than 1 letter
+                    {
+                        rest = words[i].Substring(1).ToLower();     //changes the rest of the word to lower case
+                    }
+                    words[i] = firstChar + rest;                    //arranges the first letter and rest of word
 
-                    if (words[i] == "a" || words[i] == "an" || words[i] == "the" || words[i] == "of" || words[i] == "and" || words[i] == "but" || words[i] == "for" || words[i] == "at" || words[i] == "by" || words[i] == "from" || words[i] == "to")
-                    {
-                        string shortWord = words[i].ToLower();       //converts designated short words to lowercase
-                        continue;
-                    }
-                    else
-                    {
-                        firstChar = char.ToUpper(words[i][0]);      //changes the first letter of each word as upper case
-                        string rest = "";
-                        if (words[i].Length > 1)                    //for each word length thats greater than 1 letter
-                        {
-                            rest = words[i].Substring(1).ToLower(); //changes the rest of the word to lower case
-                        }
-                        words[i] = firstChar + rest;                //arranges the first letter and rest of word
-                    }
                 }
                 return string.Join(" ", words);                     //joins all the words back into a sentence
             }
@@ -114,19 +106,19 @@ namespace Midterm
             {
                 if (temp = int.TryParse(userNum, out numTemp))
                 {
-                    if (numTemp > 0 && numTemp <= 4)
+                    if (numTemp > 0 && numTemp <= 6)
                     {
                         return numTemp;
                     }
                     else
                     {
-                        Console.Write("Invalid input, enter a number between 1 and 4.");
+                        Console.Write("Invalid input, enter a number between 1 and 6.");
                         userNum = Console.ReadLine();//changes variable and loops to top
                     }
                 }
                 else
                 {
-                    Console.Write("Invalid input, enter a number between 1 and 4.");
+                    Console.Write("Invalid input, enter a number between 1 and 6.");
                     userNum = Console.ReadLine();//changes variable and loops to top
                 }
             }
