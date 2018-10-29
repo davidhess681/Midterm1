@@ -95,15 +95,13 @@ namespace Midterm
                 else
                 {
                     Status = false;//set to checked in
-                    Console.WriteLine("\nCheckout aborted. Press any key to continue:");
-                    Console.ReadKey();
+                    Console.WriteLine("\nCheckout aborted.");
                 }
             }
             else //if the book is checked out, tell user with due date.
             {
-                Console.WriteLine("Sorry {0} is checked out. It is due to be back on {1}.\n" +
-                    "Press any key to continue:", Title, DueDate);
-                Console.ReadKey();
+                Console.WriteLine("Sorry {0} is checked out. It is due to be back on {1}.\n",
+                    Title, DueDate);
             }
 
         }
@@ -113,9 +111,8 @@ namespace Midterm
 
             if (Status == false)//if the book is checked in
             {
-                Console.WriteLine("This book {0} is already checked in. Press Enter to continue",
+                Console.WriteLine("This book {0} is already checked in.",
                     Title);
-                Console.ReadLine();
             }
             else //if the book is checked out
             {
@@ -129,8 +126,7 @@ namespace Midterm
                 else
                 {
                     Status = true;//set to not returned
-                    Console.WriteLine("\nProcess aborted. Press any key to continue:");
-                    Console.ReadKey();
+                    Console.WriteLine("\nProcess aborted.");
                 }
             }
         }

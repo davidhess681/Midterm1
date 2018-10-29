@@ -19,7 +19,7 @@ namespace Midterm
             Console.Clear();
             Console.Beep();
             Console.WriteLine("\n\nPlease choose a number of the following opitions:\n");
-            Console.WriteLine("1. List All Books\n2. Search\n3. Check Out Book" +
+            Console.WriteLine("1. List All Books\n2. Search\n3. Checkout Book" +
                 "\n4. Return Book\n5. Add Book\n6. Quit Program");
             Console.Write("\nPlease enter a menu number: ");
             userNumSelectMenu =  Validation.SelectNum(Console.ReadLine()); //validates user selection
@@ -101,7 +101,8 @@ namespace Midterm
                         break;
                     }
             }
-
+            Console.WriteLine("\nPress Enter To Continue");
+            Console.ReadLine();
         }
 
         //method to check for book in list for return and checkout actions 1 in allList method
@@ -166,8 +167,8 @@ namespace Midterm
 
                         foreach (Book b in Program.Library) //loop that looks for title keyword match and adds it to List.
                         {
-                            toLower = b.Title.ToLower();
-                            if (toLower.Contains(userSearch))
+                            toLowerTitle = b.Title.ToLower();
+                            if (toLowerTitle.Contains(userSearch))
                             {
                                 ListForWrite.Add(b);
                             }
@@ -183,8 +184,8 @@ namespace Midterm
 
                         foreach (Book b in Program.Library) //loop that looks for author keyword match and adds it to List.
                         {
-                            toLowerToo = b.Author.ToLower();
-                            if (toLowerToo.Contains(userSearch)) //stores each item in array if string contains usersearch
+                            toLowerAuthor = b.Author.ToLower();
+                            if (toLowerAuthor.Contains(userSearch)) //stores each item in array if string contains usersearch
                             {
                                 ListForWrite.Add(b);
                             }
@@ -200,14 +201,14 @@ namespace Midterm
 
                         foreach (Book b in Program.Library) //loop that looks for title and author match and adds it to List.
                         {
-                            toLower = b.Title.ToLower();
-                            toLowerToo = b.Author.ToLower();
+                            toLowerTitle = b.Title.ToLower();
+                            toLowerAuthor = b.Author.ToLower();
 
-                            if (toLower.Contains(userSearch)) //stores each item in array if string contains usersearch
+                            if (toLowerTitle.Contains(userSearch)) //stores each item in array if string contains usersearch
                             {
                                 ListForWrite.Add(b);
                             }
-                            else if (toLowerToo.Contains(userSearch))
+                            else if (toLowerAuthor.Contains(userSearch))
                             {
                                 ListForWrite.Add(b);
                             }
@@ -226,7 +227,7 @@ namespace Midterm
         }
 
         // uses gobal ListForWrite results from search book to go into other methods checkout search and return
-        private static void ResultsOfSearch(string testForIf, string testForElseIf)
+        private static void ResultsOfSearch(string titleOrAuthor, string checkoutOrReturnCase)
         {
             //if searches come up with no results
             if (ListForWrite.Count() == 0)
@@ -234,7 +235,7 @@ namespace Midterm
                 Console.WriteLine("Sorry, no results\n");
             }
             // prints out all searches of array based on if switch case uses title or author
-            else if (testForIf == "searchTitle" || testForIf == "searchAuthor")
+            else if (titleOrAuthor == "searchTitle" || checkoutOrReturnCase == "searchAuthor")
             {
                 Console.WriteLine("\n{0,-50}{1,0}", "Title", "Author");
                 foreach (Book ans in ListForWrite)
@@ -257,11 +258,11 @@ namespace Midterm
 
                 //calls either return book method or checkout method to return a book at the List element based on search results that is counted by i for each result then takes user input to get that book number..
                 //also passes through validation method and class.
-                if (testForElseIf == "checkout")
+                if (checkoutOrReturnCase == "checkout")
                 {
                     ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)).Checkout();
                 }
-                else if (testForElseIf == "return")
+                else if (checkoutOrReturnCase == "return")
                 {
                     ListForWrite.ElementAt(Validation.SelectFromSearch(Console.ReadLine(), searchLength)).Return();
                 }
