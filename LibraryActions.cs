@@ -155,12 +155,11 @@ namespace Midterm
             string userSearch;
             string toLowerTitle;
             string toLowerAuthor;
-
+            ListForWrite.Clear(); //clears list for multiple loops
             switch(titleOrAuthor)
             {
                 case "searchTitle": //case for searching for title by key word
                     {
-                        ListForWrite.Clear(); //clears Lists in case of multiple searches
                         Console.Write("\nPlease input keywords you wish to search for: (by Title)");
                         userSearch = Validation.IsInputValidTitle //goes to validation
                             (Console.ReadLine().ToLower());
@@ -177,7 +176,6 @@ namespace Midterm
                     }
                 case "searchAuthor":
                     {
-                        ListForWrite.Clear(); //clears Lists in case of multiple searches
                         Console.Write("\nPlease input keywords you wish to search for: (by Author)");
                         userSearch = Validation.IsInputValidAuthor //goes to validation
                             (Console.ReadLine().ToLower());
@@ -194,7 +192,6 @@ namespace Midterm
                     }
                 case "returnedOrCheckOut":
                     {
-                        ListForWrite.Clear(); //clears Lists in case of multiple searches
                         Console.Write("\nSearch for book: ");
                         userSearch = Validation.IsInputValidTitle //goes to validation 
                             (Console.ReadLine().ToLower());
