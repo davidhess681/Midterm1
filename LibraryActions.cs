@@ -16,6 +16,8 @@ namespace Midterm
         {
             int userNumSelectMenu;
 
+            Console.Clear();
+            Console.Beep();
             Console.WriteLine("\n\nPlease choose a number of the following opitions:\n");
             Console.WriteLine("1. List All Books\n2. Search\n3. Check Out Book" +
                 "\n4. Return Book\n5. Add Book\n6. Quit Program");
@@ -147,13 +149,13 @@ namespace Midterm
             
         }
         //public static string userSearch;
-        public static void SearchBook(string testForIf, string testForElseIf)
+        public static void SearchBook(string titleOrAuthor, string checkoutOrReturnCase)
         {
             string userSearch;
-            string toLower;
-            string toLowerToo;
+            string toLowerTitle;
+            string toLowerAuthor;
 
-            switch(testForIf)
+            switch(titleOrAuthor)
             {
                 case "searchTitle": //case for searching for title by key word
                     {
@@ -220,7 +222,7 @@ namespace Midterm
 
             }
             //passes case 3 and 4 conidtions into Results of Search
-            ResultsOfSearch(testForIf, testForElseIf);
+            ResultsOfSearch(titleOrAuthor, checkoutOrReturnCase);
         }
 
         // uses gobal ListForWrite results from search book to go into other methods checkout search and return
