@@ -152,7 +152,7 @@ namespace Midterm
             }
         }
         //need to validiate user number from input menu in Search.
-        public static int SelectFromSearch(string userNum, int searchLenght)
+        public static int SelectFromSearch(string userNum, int searchLength)
         {
             bool temp;
             int numTemp;
@@ -161,21 +161,21 @@ namespace Midterm
                 if (temp = int.TryParse(userNum, out numTemp))
                 {
 
-                    if (numTemp -1 >= 0 && numTemp <= searchLenght)
+                    if (numTemp -1 >= 0 && numTemp <= searchLength)
                     {
                         return numTemp -1;
                         //break; //do we need the break or does the return break it.
                     }
                     else
                     {
-                        Console.Write("\nInvalid input, enter a number between 1 and {0}: ", searchLenght);
+                        Console.Write("\nInvalid input, enter a number between 1 and {0}: ", searchLength);
                         userNum = Console.ReadLine();//changes variable and loops to top
 
                     }
                 }
                 else
                 {
-                    Console.Write("Invalid input, enter a number between 1 and {0}: ", searchLenght);
+                    Console.Write("Invalid input, enter a number between 1 and {0}: ", searchLength);
                     userNum = Console.ReadLine();//changes variable and loops to top
                 }
             }
