@@ -253,7 +253,7 @@ namespace Midterm
                 Console.WriteLine("Sorry, no results\n");
             }
             // prints out all searches of array based on if switch case uses title or author
-            else if (titleOrAuthor == "searchTitle" || checkoutOrReturnCase == "searchAuthor")
+            else if (titleOrAuthor == "searchTitle" || titleOrAuthor == "searchAuthor")
             {
                 Console.WriteLine("\n{0,-50}{1,0}", "Title", "Author");
                 Console.WriteLine("=======================================================================");
